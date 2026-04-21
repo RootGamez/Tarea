@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --font-pixel: 'Press Start 2P', monospace;
+}
+
+.pokemon-title,
+.pokemon-heading {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}

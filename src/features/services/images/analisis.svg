@@ -1,0 +1,16 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18295E"/>
+      <stop offset="1" stop-color="#0E173E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg4)"/>
+  <rect x="145" y="155" width="280" height="360" rx="16" fill="#0B1333" fill-opacity="0.7"/>
+  <rect x="455" y="155" width="600" height="360" rx="16" fill="#0B1333" fill-opacity="0.55"/>
+  <path d="M500 260H1000" stroke="#FFCB05" stroke-opacity="0.55" stroke-width="6"/>
+  <path d="M500 340H910" stroke="#2A75BB" stroke-opacity="0.8" stroke-width="6"/>
+  <path d="M500 420H970" stroke="#DCE6FF" stroke-opacity="0.75" stroke-width="6"/>
+  <text x="175" y="255" fill="#FFFFFF" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Analisis</text>
+  <text x="175" y="310" fill="#FFFFFF" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700">de Partidas</text>
+</svg>
