@@ -1,4 +1,6 @@
 :root {
+  --landing-hero-image: url("/landing.png");
+
   --color-bg: #1a1690;
   --color-paper: #ffffff;
   --color-surface: #15143a;
@@ -10,6 +12,9 @@
   --color-primary-strong: #57cf44;
   --color-accent: #4d42ff;
   --color-border: #3f45a3;
+
+  --font-heading: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-body: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   --radius-md: 12px;
   --radius-lg: 18px;

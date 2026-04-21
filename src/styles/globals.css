@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -10,7 +12,7 @@ body,
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-body);
   color: var(--color-text);
   background:
     radial-gradient(circle at 15% 14%, rgba(141, 132, 255, 0.28) 0 22%, transparent 23%),
@@ -76,8 +78,11 @@ body {
 }
 
 .brand__text {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .site-nav {
@@ -107,24 +112,59 @@ body {
 }
 
 .hero {
-  padding: var(--space-12) 0 var(--space-8);
+  padding: var(--space-6) 0 var(--space-8);
   scroll-margin-top: 6.8rem;
 }
 
-.hero__icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 999px;
-  margin-bottom: var(--space-4);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+.hero__frame {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: calc(100vh - 8.25rem);
+  border-radius: 28px;
+  border: 1px solid rgba(141, 154, 255, 0.35);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.38);
+  background-color: #17144a;
+  background-image:
+    linear-gradient(105deg, rgba(5, 14, 22, 0.86) 0%, rgba(5, 14, 22, 0.68) 42%, rgba(5, 14, 22, 0.28) 76%),
+    /* Set --landing-hero-image in :root to use your final background photo. */
+    var(
+      --landing-hero-image,
+      radial-gradient(circle at 80% 36%, rgba(141, 132, 255, 0.36) 0 16%, rgba(15, 20, 75, 0.88) 50%)
+    );
+  background-size: cover;
+  background-position: center;
 }
 
-.hero .container {
-  background: linear-gradient(104deg, rgba(11, 11, 34, 0.84) 0 44%, rgba(255, 255, 255, 0.98) 44% 100%);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(141, 154, 255, 0.35);
-  padding: var(--space-12) var(--space-8);
-  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.32);
+.hero__frame::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(174, 187, 255, 0.38);
+  pointer-events: none;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: auto 2rem 2rem auto;
+  width: clamp(10rem, 26vw, 18rem);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, rgba(177, 153, 255, 0.5), rgba(177, 153, 255, 0));
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 8.25rem);
+  max-width: min(48rem, 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 4rem);
 }
 
 .hero__eyebrow {
@@ -132,19 +172,23 @@ body {
   color: #99a6ff;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
 
 .hero h1 {
   margin: var(--space-3) 0;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  color: var(--color-text);
-  max-width: 16ch;
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 9vw, 7.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .hero__tagline {
   margin: 0;
-  max-width: 62ch;
+  max-width: 46ch;
+  font-size: clamp(1rem, 2.1vw, 1.25rem);
   color: #d6dcff;
 }
 
@@ -232,13 +276,13 @@ body {
 }
 
 .button--secondary {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--color-text);
-  border-color: rgba(166, 178, 255, 0.42);
+  border-color: rgba(188, 222, 236, 0.5);
 }
 
 .button--secondary:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .site-footer {
@@ -310,8 +354,34 @@ body {
     padding-top: 9.75rem;
   }
 
-  .hero .container {
-    background: linear-gradient(180deg, rgba(11, 11, 34, 0.9) 0 48%, rgba(255, 255, 255, 0.98) 48% 100%);
+  .hero {
+    padding-top: var(--space-4);
+  }
+
+  .hero__frame,
+  .hero__content {
+    min-height: calc(100vh - 11.25rem);
+  }
+
+  .hero__frame {
+    border-radius: 20px;
+  }
+
+  .hero__frame::before {
+    inset: 10px;
+    border-radius: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 13vw, 4.8rem);
+  }
+
+  .hero__actions {
+    width: 100%;
+  }
+
+  .hero__actions .button {
+    flex: 1;
   }
 
   .site-footer__grid {

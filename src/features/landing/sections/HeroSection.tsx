@@ -6,15 +6,21 @@ export function HeroSection() {
   return (
     <section id="presentacion" className="hero" aria-labelledby="hero-title">
       <Container>
-        <img src="/johto-icon.svg" alt="Johto School" className="hero__icon" />
-        <p className="hero__eyebrow">Inscripciones abiertas para dominar el competitivo</p>
-        <h1 id="hero-title">{siteContent.institutionName}</h1>
-        <p className="hero__tagline">{siteContent.tagline}</p>
-        <div className="hero__actions">
-          <Button href="#programas">Ver niveles</Button>
-          <Button href="#contacto" variant="secondary">
-            Solicitar información
-          </Button>
+        <div className="hero__frame">
+          <div className="hero__overlay" role="presentation" />
+
+          <div className="hero__content">
+            <p className="hero__eyebrow">Institucion educativa</p>
+            <h1 id="hero-title">{siteContent.institutionName}</h1>
+            <p className="hero__tagline">{siteContent.tagline}</p>
+
+            <div className="hero__actions">
+              <Button href="/nosotros">Conocenos</Button>
+              <Button href="/servicios" variant="secondary">
+                Ver servicios
+              </Button>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

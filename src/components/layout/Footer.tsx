@@ -2,10 +2,10 @@ import { Container } from "./Container";
 import { siteContent } from "../../lib/constants/site";
 
 const quickLinks = [
-  { label: "Presentacion", href: "#presentacion" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" }
+  { label: "Presentacion", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Contacto", href: "mailto:admision@institucion.edu" }
 ] as const;
 
 export function Footer() {
