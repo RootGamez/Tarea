@@ -56,6 +56,13 @@ body {
   color: var(--color-text);
 }
 
+.brand__icon {
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
 .brand__mark {
   display: inline-grid;
   place-items: center;
@@ -102,6 +109,14 @@ body {
 .hero {
   padding: var(--space-12) 0 var(--space-8);
   scroll-margin-top: 6.8rem;
+}
+
+.hero__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  margin-bottom: var(--space-4);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
 .hero .container {

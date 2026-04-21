@@ -1,5 +1,6 @@
 import { Container } from "./Container";
 import { Button } from "../ui/Button";
+import { siteContent } from "../../lib/constants/site";
 
 const navItems = [
   { label: "Presentacion", href: "#presentacion" },
@@ -14,8 +15,8 @@ export function Header() {
       <Container>
         <div className="site-header__inner">
           <a href="#presentacion" className="brand" aria-label="Ir al inicio">
-            <span className="brand__mark">IE</span>
-            <span className="brand__text">Institucion Educativa</span>
+            <img src="/johto-icon.svg" alt="Johto School" className="brand__icon" />
+            <span className="brand__text">{siteContent.institutionName}</span>
           </a>
 
           <nav aria-label="Navegacion principal" className="site-nav">
