@@ -1,6 +1,7 @@
 import { Container } from "./Container";
 import { siteContent } from "../../lib/constants/site";
 
+<<<<<<< nosotros-v2
 type FooterProps = {
   pathname: string;
   onNavigate: (target: string) => void;
@@ -32,6 +33,16 @@ function getQuickLinks(pathname: string): QuickLink[] {
 export function Footer({ pathname, onNavigate }: FooterProps) {
   const quickLinks = getQuickLinks(pathname);
 
+=======
+const quickLinks = [
+  { label: "Presentacion", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Contacto", href: "mailto:admision@institucion.edu" }
+] as const;
+
+export function Footer() {
+>>>>>>> main
   return (
     <footer className="site-footer" aria-label="Pie de pagina">
       <Container>

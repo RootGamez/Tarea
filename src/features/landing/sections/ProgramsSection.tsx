@@ -4,11 +4,11 @@ import { siteContent } from "../../../lib/constants/site";
 export function ProgramsSection() {
   return (
     <Section
-      id="servicios"
-      title="Programas academicos"
-      subtitle="Trayectorias para cada etapa de aprendizaje."
+      id="programas"
+      title="Niveles de Entrenamiento"
+      subtitle="Trayectorias para dominar el competitivo de Pokémon."
     >
-      <ul className="program-list" aria-label="Listado de programas">
+      <ul className="program-list" aria-label="Listado de niveles">
         {siteContent.programs.map((program) => (
           <li key={program}>{program}</li>
         ))}

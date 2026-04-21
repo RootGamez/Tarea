@@ -6,13 +6,13 @@ export function CTASection() {
   return (
     <Section
       id="contacto"
-      title="Agenda una visita guiada"
-      subtitle="Conoce nuestras instalaciones y metodologia en persona."
+      title="Únete a JHOTO SCHOOL"
+      subtitle="Comienza tu camino hacia la maestría en el competitivo Pokémon."
     >
       <p>
         Contacto: {siteContent.contact.phone} | {siteContent.contact.email}
       </p>
-      <Button href="mailto:admision@institucion.edu">Escribir a admision</Button>
+      <Button href="mailto:admision@jhotoschool.edu">Escribir a admisión</Button>
     </Section>
   );
 }

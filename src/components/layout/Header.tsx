@@ -2,6 +2,7 @@ import { Container } from "./Container";
 import { Button } from "../ui/Button";
 import { siteContent } from "../../lib/constants/site";
 
+<<<<<<< nosotros-v2
 type HeaderProps = {
   pathname: string;
   onNavigate: (target: string) => void;
@@ -34,10 +35,21 @@ function getNavItems(pathname: string): NavItem[] {
 export function Header({ pathname, onNavigate }: HeaderProps) {
   const navItems = getNavItems(pathname);
 
+=======
+const navItems = [
+  { label: "Presentacion", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Contacto", href: "mailto:admision@institucion.edu" }
+] as const;
+
+export function Header() {
+>>>>>>> main
   return (
     <header className="site-header" aria-label="Barra principal">
       <Container>
         <div className="site-header__inner">
+<<<<<<< nosotros-v2
           <a
             href="/"
             className="brand"
@@ -47,6 +59,9 @@ export function Header({ pathname, onNavigate }: HeaderProps) {
               onNavigate("/");
             }}
           >
+=======
+          <a href="/" className="brand" aria-label="Ir al inicio">
+>>>>>>> main
             <img src="/johto-icon.svg" alt="Johto School" className="brand__icon" />
             <span className="brand__text">{siteContent.institutionName}</span>
           </a>
@@ -69,6 +84,7 @@ export function Header({ pathname, onNavigate }: HeaderProps) {
           </nav>
 
           <div className="site-header__cta">
+<<<<<<< nosotros-v2
             <Button
               href="/#contacto"
               onClick={(event) => {
@@ -78,6 +94,9 @@ export function Header({ pathname, onNavigate }: HeaderProps) {
             >
               Admisiones
             </Button>
+=======
+            <Button href="mailto:admision@institucion.edu">Admisiones</Button>
+>>>>>>> main
           </div>
         </div>
       </Container>
