@@ -1,8 +1,21 @@
-import { type MouseEvent, useEffect, useState } from "react";
+import { type MouseEvent, Suspense, lazy, useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { Container } from "../../../components/layout/Container";
 import { Button } from "../../../components/ui/Button";
 import { siteContent } from "../../../lib/constants/site";
+
+const PokeEnergyParticles = lazy(() =>
+  import("../components/PokeEnergyParticles").then((module) => ({ default: module.PokeEnergyParticles }))
+);
+const PokeballScene3D = lazy(() =>
+  import("../components/PokeballScene3D").then((module) => ({ default: module.PokeballScene3D }))
+);
+const PokeballLottie = lazy(() =>
+  import("../components/PokeballLottie").then((module) => ({ default: module.PokeballLottie }))
+);
+const PokemonSpriteShowcase = lazy(() =>
+  import("../components/PokemonSpriteShowcase").then((module) => ({ default: module.PokemonSpriteShowcase }))
+);
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
@@ -83,6 +96,10 @@ export function HeroSection() {
           onMouseLeave={handlePointerLeave}
           style={shouldReduceMotion ? undefined : { transform: frameTransform }}
         >
+          <Suspense fallback={null}>
+            <PokeEnergyParticles />
+          </Suspense>
+
           <motion.div
             className="hero__intro-curtain"
             role="presentation"
@@ -90,6 +107,14 @@ export function HeroSection() {
             animate={shouldReduceMotion ? undefined : { opacity: 0, scaleY: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 1.1, delay: 0.08, ease: [0.2, 0.7, 0.2, 1] }}
           />
+
+          <div className="hero__immersive-stack" aria-hidden="true">
+            <Suspense fallback={null}>
+              <PokeballScene3D />
+              <PokeballLottie />
+            </Suspense>
+          </div>
+
           <div className="hero__overlay" role="presentation" />
           <div className="hero__shimmer" role="presentation" />
 
@@ -205,6 +230,16 @@ export function HeroSection() {
                 </motion.li>
               ))}
             </motion.ul>
+
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ ...contentTransition, delay: shouldReduceMotion ? 0 : 0.92 }}
+            >
+              <Suspense fallback={null}>
+                <PokemonSpriteShowcase />
+              </Suspense>
+            </motion.div>
           </motion.div>
         </motion.div>
       </Container>
