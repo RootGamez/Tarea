@@ -6,13 +6,13 @@ export function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <Container>
-        <p className="hero__eyebrow">Admisiones 2026 abiertas</p>
+        <p className="hero__eyebrow">Inscripciones abiertas para dominar el competitivo</p>
         <h1 id="hero-title">{siteContent.institutionName}</h1>
         <p className="hero__tagline">{siteContent.tagline}</p>
         <div className="hero__actions">
-          <Button href="#programas">Ver programas</Button>
+          <Button href="#programas">Ver niveles</Button>
           <Button href="#contacto" variant="secondary">
-            Solicitar informacion
+            Solicitar información
           </Button>
         </div>
       </Container>

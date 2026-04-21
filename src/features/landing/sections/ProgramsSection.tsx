@@ -5,10 +5,10 @@ export function ProgramsSection() {
   return (
     <Section
       id="programas"
-      title="Programas academicos"
-      subtitle="Trayectorias para cada etapa de aprendizaje."
+      title="Niveles de Entrenamiento"
+      subtitle="Trayectorias para dominar el competitivo de Pokémon."
     >
-      <ul className="program-list" aria-label="Listado de programas">
+      <ul className="program-list" aria-label="Listado de niveles">
         {siteContent.programs.map((program) => (
           <li key={program}>{program}</li>
         ))}

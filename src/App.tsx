@@ -1,16 +1,14 @@
-import { HeroSection } from "./features/landing/sections/HeroSection";
-import { AboutSection } from "./features/landing/sections/AboutSection";
-import { ProgramsSection } from "./features/landing/sections/ProgramsSection";
-import { CTASection } from "./features/landing/sections/CTASection";
+import { Routes, Route } from 'react-router-dom';
+import { LandingView } from './features/landing/LandingView';
+import { ServicesView } from './features/services/ServicesView';
+
 
 function App() {
   return (
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <ProgramsSection />
-      <CTASection />
-    </main>
+    <Routes>
+      <Route path='/' element={<LandingView />} />
+      <Route path='/servicios' element={<ServicesView />} />
+    </Routes>
   );
 }
 

@@ -5,8 +5,8 @@ export function AboutSection() {
   return (
     <Section
       id="nosotros"
-      title="Nuestra propuesta educativa"
-      subtitle="Un enfoque academico, humano y tecnologico."
+      title="Nuestra Misión"
+      subtitle="Capacitación integral para maestros del competitivo Pokémon."
     >
       <p>{siteContent.mission}</p>
     </Section>

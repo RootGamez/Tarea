@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@heroui/react": "^3.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -26,8 +27,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "prettier": "^3.5.3",
-    "typescript-eslint": "^8.30.1",
     "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
     "vite": "^6.3.2"
   }
 }
