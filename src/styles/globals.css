@@ -1,8 +1,4 @@
-<<<<<<< nosotros-v2
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Press+Start+2P&display=swap");
-=======
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Press+Start+2P&display=swap");
->>>>>>> main
 
 * {
   box-sizing: border-box;
@@ -16,11 +12,7 @@ body,
 }
 
 body {
-<<<<<<< nosotros-v2
-  font-family: "Nunito", "Trebuchet MS", sans-serif;
-=======
   font-family: var(--font-body);
->>>>>>> main
   color: var(--color-text);
   background:
     radial-gradient(circle at 15% 14%, rgba(141, 132, 255, 0.28) 0 22%, transparent 23%),
@@ -520,7 +512,6 @@ h2,
   flex-wrap: wrap;
 }
 
-<<<<<<< nosotros-v2
 .nosotros-hero__content {
   position: relative;
   z-index: 2;
@@ -564,7 +555,8 @@ h2,
   border-radius: inherit;
   border: none;
   box-shadow: none;
-=======
+}
+
 .hero__metrics {
   margin: var(--space-8) 0 0;
   padding: 0;
@@ -731,7 +723,6 @@ h2,
   50% {
     transform: translateY(-7px);
   }
->>>>>>> main
 }
 
 .section {
@@ -1032,7 +1023,6 @@ h2,
     padding-top: 9.75rem;
   }
 
-<<<<<<< nosotros-v2
   h1,
   h2,
   .brand__text {
@@ -1041,7 +1031,8 @@ h2,
 
   .hero .container {
     background: linear-gradient(180deg, rgba(11, 11, 34, 0.9) 0 48%, rgba(255, 255, 255, 0.98) 48% 100%);
-=======
+  }
+
   .hero {
     padding-top: 0;
   }
@@ -1108,7 +1099,6 @@ h2,
 
   .hero__pokemon-sprites {
     grid-template-columns: repeat(2, minmax(0, 1fr));
->>>>>>> main
   }
 
   .nosotros-hero__content {

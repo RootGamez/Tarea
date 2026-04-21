@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
-<<<<<<< nosotros-v2
-import { HeroSection } from "./features/landing/sections/HeroSection";
-import { ProgramsSection } from "./features/landing/sections/ProgramsSection";
-import { CTASection } from "./features/landing/sections/CTASection";
-=======
 import { LandingView } from "./features/landing/LandingView";
 import { ServicesView } from "./features/services/ServicesView";
->>>>>>> main
 import { NosotrosPage } from "./features/nosotros/NosotrosPage";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
@@ -19,29 +13,19 @@ type HomePageProps = {
 function HomePage({ pathname, onNavigate }: HomePageProps) {
   return (
     <>
-<<<<<<< nosotros-v2
       <Header pathname={pathname} onNavigate={onNavigate} />
-      <main className="site-main">
-        <HeroSection />
-        <ProgramsSection />
-        <CTASection />
-      </main>
-      <Footer pathname={pathname} onNavigate={onNavigate} />
-=======
-      <Header />
       <LandingView />
-      <Footer />
+      <Footer pathname={pathname} onNavigate={onNavigate} />
     </>
   );
 }
 
-function ServicesPage() {
+function ServicesPage({ pathname, onNavigate }: HomePageProps) {
   return (
     <>
-      <Header />
+      <Header pathname={pathname} onNavigate={onNavigate} />
       <ServicesView />
-      <Footer />
->>>>>>> main
+      <Footer pathname={pathname} onNavigate={onNavigate} />
     </>
   );
 }
@@ -88,30 +72,15 @@ function App() {
 
   if (pathname === "/nosotros") {
     return (
-      <NosotrosPage
-<<<<<<< nosotros-v2
-        pathname={pathname}
-        onNavigate={navigate}
-      />
-    );
-  }
-
-  return <HomePage pathname={pathname} onNavigate={navigate} />;
-=======
-        onGoHome={() => {
-          window.history.pushState({}, "", "/");
-          setPathname("/");
-        }}
-      />
+      <NosotrosPage pathname={pathname} onNavigate={navigate} />
     );
   }
 
   if (pathname === "/servicios") {
-    return <ServicesPage />;
+    return <ServicesPage pathname={pathname} onNavigate={navigate} />;
   }
 
-  return <HomePage />;
->>>>>>> main
+  return <HomePage pathname={pathname} onNavigate={navigate} />;
 }
 
 export default App;

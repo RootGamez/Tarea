@@ -2,7 +2,6 @@ import { Container } from "./Container";
 import { Button } from "../ui/Button";
 import { siteContent } from "../../lib/constants/site";
 
-<<<<<<< nosotros-v2
 type HeaderProps = {
   pathname: string;
   onNavigate: (target: string) => void;
@@ -11,45 +10,26 @@ type HeaderProps = {
 type NavItem = {
   label: string;
   href: string;
+  isExternal?: boolean;
   matchPathname?: string;
 };
 
-function getNavItems(pathname: string): NavItem[] {
-  if (pathname === "/nosotros") {
-    return [
-      { label: "Inicio", href: "/", matchPathname: "/" },
-      { label: "Servicios", href: "/#servicios", matchPathname: "/" },
-      { label: "Nosotros", href: "/nosotros", matchPathname: "/nosotros" },
-      { label: "Contacto", href: "/#contacto", matchPathname: "/" }
-    ];
-  }
-
+function getNavItems(): NavItem[] {
   return [
-    { label: "Presentacion", href: "/#presentacion", matchPathname: "/" },
-    { label: "Servicios", href: "/#servicios", matchPathname: "/" },
+    { label: "Presentacion", href: "/", matchPathname: "/" },
     { label: "Nosotros", href: "/nosotros", matchPathname: "/nosotros" },
-    { label: "Contacto", href: "/#contacto", matchPathname: "/" }
+    { label: "Servicios", href: "/servicios", matchPathname: "/servicios" },
+    { label: "Contacto", href: "mailto:admision@institucion.edu", isExternal: true }
   ];
 }
 
 export function Header({ pathname, onNavigate }: HeaderProps) {
-  const navItems = getNavItems(pathname);
+  const navItems = getNavItems();
 
-=======
-const navItems = [
-  { label: "Presentacion", href: "/" },
-  { label: "Nosotros", href: "/nosotros" },
-  { label: "Servicios", href: "/servicios" },
-  { label: "Contacto", href: "mailto:admision@institucion.edu" }
-] as const;
-
-export function Header() {
->>>>>>> main
   return (
     <header className="site-header" aria-label="Barra principal">
       <Container>
         <div className="site-header__inner">
-<<<<<<< nosotros-v2
           <a
             href="/"
             className="brand"
@@ -59,9 +39,6 @@ export function Header() {
               onNavigate("/");
             }}
           >
-=======
-          <a href="/" className="brand" aria-label="Ir al inicio">
->>>>>>> main
             <img src="/johto-icon.svg" alt="Johto School" className="brand__icon" />
             <span className="brand__text">{siteContent.institutionName}</span>
           </a>
@@ -74,6 +51,10 @@ export function Header() {
                 className="site-nav__link"
                 aria-current={item.matchPathname === pathname ? "page" : undefined}
                 onClick={(event) => {
+                  if (item.isExternal) {
+                    return;
+                  }
+
                   event.preventDefault();
                   onNavigate(item.href);
                 }}
@@ -84,19 +65,14 @@ export function Header() {
           </nav>
 
           <div className="site-header__cta">
-<<<<<<< nosotros-v2
             <Button
-              href="/#contacto"
+              href="mailto:admision@institucion.edu"
               onClick={(event) => {
-                event.preventDefault();
-                onNavigate("/#contacto");
+                event.stopPropagation();
               }}
             >
               Admisiones
             </Button>
-=======
-            <Button href="mailto:admision@institucion.edu">Admisiones</Button>
->>>>>>> main
           </div>
         </div>
       </Container>
