@@ -3,10 +3,10 @@ import { Button } from "../ui/Button";
 import { siteContent } from "../../lib/constants/site";
 
 const navItems = [
-  { label: "Presentacion", href: "#presentacion" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" }
+  { label: "Presentacion", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Contacto", href: "mailto:admision@institucion.edu" }
 ] as const;
 
 export function Header() {
@@ -14,7 +14,7 @@ export function Header() {
     <header className="site-header" aria-label="Barra principal">
       <Container>
         <div className="site-header__inner">
-          <a href="#presentacion" className="brand" aria-label="Ir al inicio">
+          <a href="/" className="brand" aria-label="Ir al inicio">
             <img src="/johto-icon.svg" alt="Johto School" className="brand__icon" />
             <span className="brand__text">{siteContent.institutionName}</span>
           </a>
@@ -28,7 +28,7 @@ export function Header() {
           </nav>
 
           <div className="site-header__cta">
-            <Button href="#contacto">Admisiones</Button>
+            <Button href="mailto:admision@institucion.edu">Admisiones</Button>
           </div>
         </div>
       </Container>
