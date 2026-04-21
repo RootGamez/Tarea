@@ -517,6 +517,11 @@ h2,
   z-index: 2;
   min-width: 0;
   max-width: 52ch;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
 }
 
 .nosotros-hero__mission {
@@ -534,6 +539,11 @@ h2,
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  min-height: clamp(320px, 56vh, 500px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(130, 144, 255, 0.3);
+  background: linear-gradient(145deg, rgba(19, 22, 59, 0.92), rgba(13, 15, 44, 0.92));
+  box-shadow: 0 20px 32px rgba(0, 0, 0, 0.25);
 }
 
 .nosotros-hero .container::after {
