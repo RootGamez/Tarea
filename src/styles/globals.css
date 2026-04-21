@@ -112,20 +112,24 @@ body {
 }
 
 .hero {
-  padding: var(--space-6) 0 var(--space-8);
+  padding: 0;
   scroll-margin-top: 6.8rem;
+}
+
+.hero__viewport {
+  width: 100%;
 }
 
 .hero__frame {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  min-height: calc(100vh - 8.25rem);
+  min-height: calc(100dvh - 5.25rem);
   transform-style: preserve-3d;
   will-change: transform;
-  border-radius: 28px;
-  border: 1px solid rgba(141, 154, 255, 0.35);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.38);
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
   background-color: #17144a;
   background-image:
     linear-gradient(105deg, rgba(5, 14, 22, 0.86) 0%, rgba(5, 14, 22, 0.68) 42%, rgba(5, 14, 22, 0.28) 76%),
@@ -333,6 +337,7 @@ body {
   border-radius: 20px;
   border: 1px solid rgba(174, 187, 255, 0.38);
   pointer-events: none;
+  display: none;
 }
 
 .hero__overlay {
@@ -396,7 +401,7 @@ body {
 .hero__content {
   position: relative;
   z-index: 2;
-  min-height: calc(100vh - 8.25rem);
+  min-height: calc(100dvh - 5.25rem);
   max-width: min(48rem, 100%);
   display: flex;
   flex-direction: column;
@@ -817,12 +822,12 @@ body {
   }
 
   .hero {
-    padding-top: var(--space-4);
+    padding-top: 0;
   }
 
   .hero__frame,
   .hero__content {
-    min-height: calc(100vh - 11.25rem);
+    min-height: calc(100dvh - 9.75rem);
   }
 
   .hero__frame {
@@ -846,15 +851,6 @@ body {
 
   .celebration__sprites {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .hero__frame {
-    border-radius: 20px;
-  }
-
-  .hero__frame::before {
-    inset: 10px;
-    border-radius: 14px;
   }
 
   .hero h1 {

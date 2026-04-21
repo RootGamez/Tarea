@@ -1,6 +1,5 @@
 import { type MouseEvent, Suspense, lazy, useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
-import { Container } from "../../../components/layout/Container";
 import { Button } from "../../../components/ui/Button";
 import { siteContent } from "../../../lib/constants/site";
 
@@ -84,7 +83,7 @@ export function HeroSection() {
   const highlights = [
     { value: "15+", label: "Anios de trayectoria" },
     { value: "2.4k", label: "Estudiantes formados" },
-    { value: "98%", label: "Satisfaccion institucional" }
+    { value: "100%", label: "Excelencia academica comprobada" }
   ] as const;
 
   const contentTransition = shouldReduceMotion
@@ -93,7 +92,7 @@ export function HeroSection() {
 
   return (
     <section id="presentacion" className="hero" aria-labelledby="hero-title">
-      <Container>
+      <div className="hero__viewport">
         <motion.div
           className="hero__frame"
           onMouseMove={handlePointerMove}
@@ -246,7 +245,7 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
         </motion.div>
-      </Container>
+      </div>
 
       <Suspense fallback={null}>
         <ScholarshipCelebrationModal isOpen={isCelebrationOpen} onClose={() => setIsCelebrationOpen(false)} />
