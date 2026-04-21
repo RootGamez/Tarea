@@ -1,5 +1,5 @@
 export const siteContent = {
-  institutionName: "Institucion Educativa Modelo",
+  institutionName: "Johto School",
   tagline: "Formamos lideres con excelencia academica y valores humanos.",
   mission:
     "Ofrecer una educacion integral, innovadora y centrada en el estudiante para transformar su futuro.",

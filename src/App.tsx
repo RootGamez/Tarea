@@ -4,15 +4,21 @@ import { AboutSection } from "./features/landing/sections/AboutSection";
 import { ProgramsSection } from "./features/landing/sections/ProgramsSection";
 import { CTASection } from "./features/landing/sections/CTASection";
 import { NosotrosPage } from "./features/nosotros/NosotrosPage";
+import { Header } from "./components/layout/Header";
+import { Footer } from "./components/layout/Footer";
 
 function HomePage() {
   return (
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <ProgramsSection />
-      <CTASection />
-    </main>
+    <>
+      <Header />
+      <main className="site-main">
+        <HeroSection />
+        <ProgramsSection />
+        <AboutSection />
+        <CTASection />
+      </main>
+      <Footer />
+    </>
   );
 }
 
