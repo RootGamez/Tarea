@@ -4,7 +4,7 @@ import { siteContent } from "../../../lib/constants/site";
 export function ProgramsSection() {
   return (
     <Section
-      id="programas"
+      id="servicios"
       title="Programas academicos"
       subtitle="Trayectorias para cada etapa de aprendizaje."
     >
