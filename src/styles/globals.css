@@ -41,6 +41,10 @@ h2,
   padding-top: 6.5rem;
 }
 
+.nosotros-main {
+  padding-top: 0;
+}
+
 .container {
   width: min(100% - 2rem, var(--container-max));
   margin-inline: auto;
@@ -512,16 +516,65 @@ h2,
   flex-wrap: wrap;
 }
 
-.nosotros-hero__content {
+.nosotros-hero__intro {
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  grid-area: intro;
   min-width: 0;
-  max-width: 52ch;
-  min-height: 100%;
+  max-width: min(36rem, 100%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: clamp(1.4rem, 3vw, 2.6rem);
+  justify-content: flex-start;
+  gap: var(--space-3);
+  padding: clamp(2.6rem, 6vh, 4.6rem) 0 0;
+}
+
+.nosotros-hero__layout {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100dvh - 5.25rem);
+  display: grid;
+  grid-template-columns: minmax(300px, 0.82fr) minmax(420px, 1.18fr);
+  grid-template-areas:
+    "intro enfoque"
+    "switch enfoque"
+    "comunidad egresados";
+  grid-template-rows: auto auto 1fr;
+  align-items: start;
+  gap: var(--space-6);
+  padding: clamp(1.2rem, 3vw, 2.4rem) clamp(1.2rem, 3vw, 2.4rem) clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.nosotros-hero .hero__eyebrow {
+  margin: 0;
+}
+
+.nosotros-hero h1 {
+  margin: 0;
+  max-width: 10.5ch;
+  font-size: clamp(3rem, 8.2vw, 6rem);
+  line-height: 0.94;
+}
+
+.nosotros-hero__mission {
+  margin: 0;
+  max-width: 24ch;
+  font-size: clamp(1.02rem, 2vw, 1.18rem);
+}
+
+.nosotros-hero .hero__particles {
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.nosotros-hero .hero__shimmer {
+  z-index: 1;
+}
+
+.nosotros-hero__floating-tags {
+  top: clamp(1rem, 2.4vw, 1.8rem);
+  right: clamp(1rem, 2.4vw, 1.8rem);
+  z-index: 3;
 }
 
 .nosotros-hero__mission {
@@ -535,25 +588,22 @@ h2,
   margin: 0;
 }
 
-.nosotros-hero .container {
+.nosotros-hero__viewport {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  min-height: clamp(320px, 56vh, 500px);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(130, 144, 255, 0.3);
-  background: linear-gradient(145deg, rgba(19, 22, 59, 0.92), rgba(13, 15, 44, 0.92));
-  box-shadow: 0 20px 32px rgba(0, 0, 0, 0.25);
+  min-height: calc(100dvh - 5.25rem);
+  background: linear-gradient(145deg, rgba(19, 22, 59, 0.7), rgba(13, 15, 44, 0.7));
 }
 
-.nosotros-hero .container::after {
+.nosotros-hero__viewport::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(11, 11, 34, 0.88) 0 44%, rgba(11, 11, 34, 0.45) 60%, rgba(11, 11, 34, 0.15) 100%),
+    linear-gradient(90deg, rgba(11, 11, 34, 0.9) 0 46%, rgba(11, 11, 34, 0.56) 62%, rgba(11, 11, 34, 0.24) 100%),
     linear-gradient(180deg, rgba(7, 9, 30, 0.42), rgba(7, 9, 30, 0.12));
 }
 
@@ -562,9 +612,109 @@ h2,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  border-radius: 0;
   border: none;
   box-shadow: none;
+}
+
+.nosotros-hero__panel-switch {
+  grid-area: switch;
+  margin-top: 0;
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: rgba(8, 12, 44, 0.46);
+  border: 1px solid rgba(145, 160, 255, 0.28);
+  width: fit-content;
+}
+
+.nosotros-hero__panel-button {
+  appearance: none;
+  border: 1px solid rgba(165, 180, 255, 0.65);
+  border-radius: 999px;
+  background: linear-gradient(165deg, rgba(20, 28, 86, 0.94), rgba(11, 16, 58, 0.9));
+  color: #f3f6ff;
+  font-family: var(--font-pokemon);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.64rem 0.98rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(4, 8, 35, 0.42);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nosotros-hero__panel-button:hover {
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(239, 248, 255, 0.85);
+  box-shadow: 0 12px 20px rgba(5, 10, 45, 0.5);
+}
+
+.nosotros-hero__panel-button.is-active {
+  border-color: rgba(118, 244, 76, 0.95);
+  background:
+    linear-gradient(155deg, rgba(66, 205, 69, 0.92), rgba(48, 164, 52, 0.88)),
+    linear-gradient(175deg, rgba(35, 93, 36, 0.5), rgba(16, 41, 17, 0.3));
+  color: #09230b;
+  box-shadow:
+    0 0 0 2px rgba(185, 255, 164, 0.28),
+    0 10px 26px rgba(30, 91, 34, 0.48);
+}
+
+.nosotros-hero__live-panel {
+  margin-top: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.nosotros-panel {
+  min-width: 0;
+  width: 100%;
+  align-self: start;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nosotros-panel--enfoque {
+  grid-area: enfoque;
+}
+
+.nosotros-panel--egresados {
+  grid-area: egresados;
+}
+
+.nosotros-panel--comunidad {
+  grid-area: comunidad;
+}
+
+.nosotros-panel.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nosotros-panel.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.nosotros-hero__live-panel .nosotros-pillars {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.nosotros-hero__live-panel .nosotros-info-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.nosotros-hero__live-panel .champions-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
 }
 
 .hero__metrics {
@@ -735,6 +885,18 @@ h2,
   }
 }
 
+@keyframes revealLift {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .section {
   padding-bottom: var(--space-8);
   scroll-margin-top: 6.8rem;
@@ -812,6 +974,19 @@ h2,
   border-radius: var(--radius-lg);
   border: 1px solid rgba(139, 154, 255, 0.38);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  animation: revealLift 0.55s ease both;
+}
+
+.nosotros-pillars li:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.nosotros-pillars li:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.nosotros-pillars li:nth-child(4) {
+  animation-delay: 0.18s;
 }
 
 .nosotros-pillars__index {
@@ -842,6 +1017,11 @@ h2,
   border-radius: var(--radius-lg);
   border: 1px solid rgba(130, 144, 255, 0.32);
   background: linear-gradient(145deg, rgba(9, 13, 42, 0.65), rgba(31, 37, 94, 0.55));
+  animation: revealLift 0.65s ease both;
+}
+
+.nosotros-info-card:nth-child(2) {
+  animation-delay: 0.1s;
 }
 
 .nosotros-info-card h3 {
@@ -869,6 +1049,11 @@ h2,
   border: 1px solid rgba(130, 144, 255, 0.36);
   background: linear-gradient(165deg, rgba(9, 13, 42, 0.7), rgba(31, 37, 94, 0.54));
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  animation: revealLift 0.7s ease both;
+}
+
+.champion-card:nth-child(2) {
+  animation-delay: 0.12s;
 }
 
 .champion-card img {
@@ -1033,6 +1218,10 @@ h2,
     padding-top: 9.75rem;
   }
 
+  .nosotros-main {
+    padding-top: 0;
+  }
+
   h1,
   h2,
   .brand__text {
@@ -1049,6 +1238,10 @@ h2,
 
   .hero__frame,
   .hero__content {
+    min-height: calc(100dvh - 9.75rem);
+  }
+
+  .nosotros-hero__viewport {
     min-height: calc(100dvh - 9.75rem);
   }
 
@@ -1111,11 +1304,47 @@ h2,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .nosotros-hero__content {
+  .nosotros-hero__intro {
     max-width: 100%;
+    padding-top: clamp(1.4rem, 4vh, 2.4rem);
   }
 
-  .nosotros-hero .container::after {
+  .nosotros-hero__layout {
+    min-height: calc(100dvh - 9.75rem);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "switch"
+      "enfoque"
+      "egresados"
+      "comunidad";
+    grid-template-rows: auto auto auto auto auto;
+    align-items: start;
+    gap: var(--space-4);
+  }
+
+  .nosotros-hero__floating-tags {
+    right: 0.8rem;
+    top: 0.8rem;
+  }
+
+  .nosotros-hero__panel-button {
+    font-size: 0.56rem;
+    padding: 0.54rem 0.74rem;
+  }
+
+  .nosotros-hero h1 {
+    font-size: clamp(2.45rem, 13vw, 4.2rem);
+    max-width: 9.5ch;
+  }
+
+  .nosotros-hero__live-panel .nosotros-pillars,
+  .nosotros-hero__live-panel .nosotros-info-grid,
+  .nosotros-hero__live-panel .champions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotros-hero__viewport::after {
     background:
       linear-gradient(180deg, rgba(11, 11, 34, 0.84) 0 58%, rgba(11, 11, 34, 0.35) 100%),
       linear-gradient(180deg, rgba(7, 9, 30, 0.35), rgba(7, 9, 30, 0.1));
@@ -1136,7 +1365,10 @@ h2,
   .hero__overlay,
   .hero__shimmer,
   .hero__floating-tags li,
-  .hero__pokemon-sprites img {
+  .hero__pokemon-sprites img,
+  .nosotros-pillars li,
+  .nosotros-info-card,
+  .champion-card {
     animation: none;
   }
 
