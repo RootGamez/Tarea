@@ -11,7 +11,7 @@ export function ServicesSection() {
     >
       <div className="services-grid">
         {siteContent.services.map((service, index) => (
-          <Card key={index} className="service-card" shadow="sm" isHoverable>
+          <Card key={index} className="service-card">
             <Card.Header>
               <h3 className="service-title">{service.title}</h3>
             </Card.Header>
