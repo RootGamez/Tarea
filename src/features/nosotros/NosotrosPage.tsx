@@ -47,13 +47,7 @@ export function NosotrosPage({ pathname, onNavigate }: NosotrosPageProps) {
               <h1 id="nosotros-title">Nosotros</h1>
               <p className="hero__tagline nosotros-hero__mission">{siteContent.mission}</p>
               <div className="hero__actions">
-                <Button
-                  href="/#contacto"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onNavigate("/#contacto");
-                  }}
-                >
+                <Button href={siteContent.contact.whatsappUrl} target="_blank" rel="noreferrer">
                   Hablar con admisiones
                 </Button>
                 <Button
