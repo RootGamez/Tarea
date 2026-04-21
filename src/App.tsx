@@ -1,29 +1,57 @@
 import { useEffect, useState } from "react";
 import { HeroSection } from "./features/landing/sections/HeroSection";
-import { AboutSection } from "./features/landing/sections/AboutSection";
 import { ProgramsSection } from "./features/landing/sections/ProgramsSection";
 import { CTASection } from "./features/landing/sections/CTASection";
 import { NosotrosPage } from "./features/nosotros/NosotrosPage";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 
-function HomePage() {
+type HomePageProps = {
+  pathname: string;
+  onNavigate: (target: string) => void;
+};
+
+function HomePage({ pathname, onNavigate }: HomePageProps) {
   return (
     <>
-      <Header />
+      <Header pathname={pathname} onNavigate={onNavigate} />
       <main className="site-main">
         <HeroSection />
         <ProgramsSection />
-        <AboutSection />
         <CTASection />
       </main>
-      <Footer />
+      <Footer pathname={pathname} onNavigate={onNavigate} />
     </>
   );
 }
 
 function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname);
+
+  const navigate = (target: string) => {
+    const nextUrl = new URL(target, window.location.origin);
+    const nextPathname = nextUrl.pathname;
+
+    if (
+      window.location.pathname === nextPathname &&
+      window.location.hash === nextUrl.hash
+    ) {
+      return;
+    }
+
+    window.history.pushState({}, "", `${nextPathname}${nextUrl.hash}`);
+    setPathname(nextPathname);
+
+    requestAnimationFrame(() => {
+      if (nextUrl.hash) {
+        const section = document.querySelector(nextUrl.hash);
+        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
 
   useEffect(() => {
     const handlePopState = () => {
@@ -38,15 +66,15 @@ function App() {
   }, []);
 
   if (pathname === "/nosotros") {
-    return <NosotrosPage onGoHome={() => {
-      window.history.pushState({}, "", "/");
-      setPathname("/");
-    }} />;
+    return (
+      <NosotrosPage
+        pathname={pathname}
+        onNavigate={navigate}
+      />
+    );
   }
 
-  return (
-    <HomePage />
-  );
+  return <HomePage pathname={pathname} onNavigate={navigate} />;
 }
 
 export default App;

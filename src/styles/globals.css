@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Press+Start+2P&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -10,13 +12,27 @@ body,
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
   color: var(--color-text);
   background:
     radial-gradient(circle at 15% 14%, rgba(141, 132, 255, 0.28) 0 22%, transparent 23%),
     radial-gradient(circle at 88% 10%, rgba(105, 94, 255, 0.3) 0 26%, transparent 27%),
     linear-gradient(135deg, #1c199f 0%, #3028cf 48%, #4333ea 100%);
   line-height: 1.5;
+}
+
+h1,
+h2,
+.brand__text {
+  font-family: "Press Start 2P", "Trebuchet MS", sans-serif;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.site-nav__link,
+.button {
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+  font-weight: 800;
 }
 
 .site-main {
@@ -155,6 +171,51 @@ body {
   flex-wrap: wrap;
 }
 
+.nosotros-hero__content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  max-width: 52ch;
+}
+
+.nosotros-hero__mission {
+  max-width: 100%;
+}
+
+.nosotros-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+.nosotros-hero .container {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.nosotros-hero .container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(11, 11, 34, 0.88) 0 44%, rgba(11, 11, 34, 0.45) 60%, rgba(11, 11, 34, 0.15) 100%),
+    linear-gradient(180deg, rgba(7, 9, 30, 0.42), rgba(7, 9, 30, 0.12));
+}
+
+.nosotros-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  border: none;
+  box-shadow: none;
+}
+
 .section {
   padding-bottom: var(--space-8);
   scroll-margin-top: 6.8rem;
@@ -182,6 +243,15 @@ body {
   box-shadow: 0 20px 32px rgba(0, 0, 0, 0.25);
 }
 
+.section .container > p {
+  margin: 0;
+  max-width: 72ch;
+}
+
+.section .container > p + p {
+  margin-top: var(--space-3);
+}
+
 .section:nth-of-type(even) .container {
   background: linear-gradient(140deg, rgba(255, 255, 255, 0.98), rgba(238, 242, 255, 0.96));
 }
@@ -205,6 +275,140 @@ body {
 
 .about__actions {
   margin-top: var(--space-5);
+}
+
+.nosotros-pillars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.nosotros-pillars li {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(139, 154, 255, 0.38);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+}
+
+.nosotros-pillars__index {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: #0a0a0f;
+  background: var(--color-primary);
+  font-weight: 800;
+}
+
+.nosotros-pillars li p {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.nosotros-info-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.nosotros-info-card {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(130, 144, 255, 0.32);
+  background: linear-gradient(145deg, rgba(9, 13, 42, 0.65), rgba(31, 37, 94, 0.55));
+}
+
+.nosotros-info-card h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  font-family: "Press Start 2P", "Trebuchet MS", sans-serif;
+  font-size: 0.8rem;
+  color: #b8ffc6;
+  line-height: 1.45;
+}
+
+.nosotros-info-card p {
+  margin: 0;
+}
+
+.champions-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.champion-card {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(130, 144, 255, 0.36);
+  background: linear-gradient(165deg, rgba(9, 13, 42, 0.7), rgba(31, 37, 94, 0.54));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.champion-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.champion-card__body {
+  padding: var(--space-4);
+}
+
+.champion-card__body h3 {
+  margin: 0;
+  font-family: "Press Start 2P", "Trebuchet MS", sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: #b8ffc6;
+}
+
+.champion-card__body p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text);
+}
+
+.section:nth-of-type(even) .nosotros-pillars li {
+  background: linear-gradient(140deg, rgba(77, 66, 255, 0.08), rgba(44, 179, 76, 0.09));
+  border-color: rgba(80, 110, 255, 0.3);
+}
+
+.section:nth-of-type(even) .nosotros-pillars li p {
+  color: var(--color-text-dark);
+}
+
+.section:nth-of-type(even) .nosotros-info-card {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(234, 239, 255, 0.92));
+  border-color: rgba(102, 116, 213, 0.35);
+}
+
+.section:nth-of-type(even) .nosotros-info-card h3 {
+  color: #1b2a76;
+}
+
+.section:nth-of-type(even) .nosotros-info-card p {
+  color: var(--color-text-dark);
+}
+
+.section:nth-of-type(even) .champion-card {
+  border-color: rgba(102, 116, 213, 0.36);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(234, 239, 255, 0.93));
+}
+
+.section:nth-of-type(even) .champion-card__body h3 {
+  color: #1b2a76;
+}
+
+.section:nth-of-type(even) .champion-card__body p {
+  color: var(--color-text-dark);
 }
 
 .button {
@@ -310,8 +514,28 @@ body {
     padding-top: 9.75rem;
   }
 
+  h1,
+  h2,
+  .brand__text {
+    line-height: 1.5;
+  }
+
   .hero .container {
     background: linear-gradient(180deg, rgba(11, 11, 34, 0.9) 0 48%, rgba(255, 255, 255, 0.98) 48% 100%);
+  }
+
+  .nosotros-hero__content {
+    max-width: 100%;
+  }
+
+  .nosotros-hero .container::after {
+    background:
+      linear-gradient(180deg, rgba(11, 11, 34, 0.84) 0 58%, rgba(11, 11, 34, 0.35) 100%),
+      linear-gradient(180deg, rgba(7, 9, 30, 0.35), rgba(7, 9, 30, 0.1));
+  }
+
+  .nosotros-hero__mission {
+    max-width: 100%;
   }
 
   .site-footer__grid {

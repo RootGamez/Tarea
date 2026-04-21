@@ -1,14 +1,37 @@
 import { Container } from "./Container";
 import { siteContent } from "../../lib/constants/site";
 
-const quickLinks = [
-  { label: "Presentacion", href: "#presentacion" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" }
-] as const;
+type FooterProps = {
+  pathname: string;
+  onNavigate: (target: string) => void;
+};
 
-export function Footer() {
+type QuickLink = {
+  label: string;
+  href: string;
+};
+
+function getQuickLinks(pathname: string): QuickLink[] {
+  if (pathname === "/nosotros") {
+    return [
+      { label: "Inicio", href: "/" },
+      { label: "Servicios", href: "/#servicios" },
+      { label: "Nosotros", href: "/nosotros" },
+      { label: "Contacto", href: "/#contacto" }
+    ];
+  }
+
+  return [
+    { label: "Presentacion", href: "/#presentacion" },
+    { label: "Servicios", href: "/#servicios" },
+    { label: "Nosotros", href: "/nosotros" },
+    { label: "Contacto", href: "/#contacto" }
+  ];
+}
+
+export function Footer({ pathname, onNavigate }: FooterProps) {
+  const quickLinks = getQuickLinks(pathname);
+
   return (
     <footer className="site-footer" aria-label="Pie de pagina">
       <Container>
@@ -23,7 +46,15 @@ export function Footer() {
             <ul className="site-footer__links">
               {quickLinks.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href}>{item.label}</a>
+                  <a
+                    href={item.href}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onNavigate(item.href);
+                    }}
+                  >
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
