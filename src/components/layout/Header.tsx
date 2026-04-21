@@ -2,6 +2,9 @@ import { Container } from "./Container";
 import { Button } from "../ui/Button";
 import { siteContent } from "../../lib/constants/site";
 
+const WHATSAPP_ADMISSIONS_URL =
+  "https://wa.me/51977872875?text=Hola%20Johto%20School%2C%20quiero%20informacion%20de%20admisiones";
+
 type HeaderProps = {
   pathname: string;
   onNavigate: (target: string) => void;
@@ -19,7 +22,7 @@ function getNavItems(): NavItem[] {
     { label: "Presentacion", href: "/", matchPathname: "/" },
     { label: "Nosotros", href: "/nosotros", matchPathname: "/nosotros" },
     { label: "Servicios", href: "/servicios", matchPathname: "/servicios" },
-    { label: "Contacto", href: "mailto:admision@institucion.edu", isExternal: true }
+    { label: "Contacto", href: "/contacto", matchPathname: "/contacto" }
   ];
 }
 
@@ -66,7 +69,9 @@ export function Header({ pathname, onNavigate }: HeaderProps) {
 
           <div className="site-header__cta">
             <Button
-              href="mailto:admision@institucion.edu"
+              href={WHATSAPP_ADMISSIONS_URL}
+              target="_blank"
+              rel="noreferrer"
               onClick={(event) => {
                 event.stopPropagation();
               }}

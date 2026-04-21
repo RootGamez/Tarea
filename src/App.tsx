@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { LandingView } from "./features/landing/LandingView";
 import { ServicesView } from "./features/services/ServicesView";
 import { NosotrosPage } from "./features/nosotros/NosotrosPage";
+import { ContactoView } from "./features/contacto/ContactoView";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 
@@ -78,6 +79,16 @@ function App() {
 
   if (pathname === "/servicios") {
     return <ServicesPage pathname={pathname} onNavigate={navigate} />;
+  }
+
+  if (pathname === "/contacto") {
+    return (
+      <>
+        <Header pathname={pathname} onNavigate={navigate} />
+        <ContactoView />
+        <Footer pathname={pathname} onNavigate={navigate} />
+      </>
+    );
   }
 
   return <HomePage pathname={pathname} onNavigate={navigate} />;

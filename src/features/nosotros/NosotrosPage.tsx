@@ -70,19 +70,24 @@ export function NosotrosPage({ pathname, onNavigate }: NosotrosPageProps) {
               <img src="/johtosch.png" alt="" loading="lazy" />
             </figure>
 
-            <div className="hero__shimmer" role="presentation" />
-
-            <ul className="hero__floating-tags nosotros-hero__floating-tags" aria-label="Aspectos destacados">
-              {floatingTags.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-
-            <div className="nosotros-hero__layout">
-              <div className="nosotros-hero__intro">
-                <p className="hero__eyebrow">Conoce Johto School</p>
-                <h1 id="nosotros-title">Nosotros</h1>
-                <p className="hero__tagline nosotros-hero__mission">{siteContent.mission}</p>
+            <div className="nosotros-hero__content">
+              <p className="hero__eyebrow">Conoce Johto School</p>
+              <h1 id="nosotros-title">Nosotros</h1>
+              <p className="hero__tagline nosotros-hero__mission">{siteContent.mission}</p>
+              <div className="hero__actions">
+                <Button href={siteContent.contact.whatsappUrl} target="_blank" rel="noreferrer">
+                  Hablar con admisiones
+                </Button>
+                <Button
+                  href="/#servicios"
+                  variant="secondary"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onNavigate("/#servicios");
+                  }}
+                >
+                  Ver servicios
+                </Button>
               </div>
 
               <div className="nosotros-hero__panel-switch" role="group" aria-label="Mostrar u ocultar secciones de nosotros">

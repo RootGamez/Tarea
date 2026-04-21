@@ -41,7 +41,8 @@ export const siteContent = {
     }
   ],
   contact: {
-    phone: "+00 000 000 000",
-    email: "admision@institucion.edu"
+    phone: "+51 977 872 875",
+    email: "admision@institucion.edu",
+    whatsappUrl: "https://wa.me/51977872875?text=Hola%20Johto%20School%2C%20quiero%20informacion%20de%20admisiones"
   }
 } as const;

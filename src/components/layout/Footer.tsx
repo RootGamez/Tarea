@@ -17,7 +17,7 @@ function getQuickLinks(pathname: string): QuickLink[] {
     { label: pathname === "/" ? "Presentacion" : "Inicio", href: "/" },
     { label: "Nosotros", href: "/nosotros" },
     { label: "Servicios", href: "/servicios" },
-    { label: "Contacto", href: "mailto:admision@institucion.edu", isExternal: true }
+    { label: "Contacto", href: "/contacto" }
   ];
 }
 
@@ -58,7 +58,9 @@ export function Footer({ pathname, onNavigate }: FooterProps) {
 
           <section>
             <h3>Contacto</h3>
-            <p>{siteContent.contact.phone}</p>
+            <a href={siteContent.contact.whatsappUrl} target="_blank" rel="noreferrer">
+              {siteContent.contact.phone}
+            </a>
             <a href={`mailto:${siteContent.contact.email}`}>{siteContent.contact.email}</a>
           </section>
         </div>
