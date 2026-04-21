@@ -16,10 +16,14 @@ const PokeballLottie = lazy(() =>
 const PokemonSpriteShowcase = lazy(() =>
   import("../components/PokemonSpriteShowcase").then((module) => ({ default: module.PokemonSpriteShowcase }))
 );
+const ScholarshipCelebrationModal = lazy(() =>
+  import("../components/ScholarshipCelebrationModal").then((module) => ({ default: module.ScholarshipCelebrationModal }))
+);
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
   const [mottoIndex, setMottoIndex] = useState(0);
+  const [isCelebrationOpen, setIsCelebrationOpen] = useState(false);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
 
@@ -108,10 +112,10 @@ export function HeroSection() {
             transition={shouldReduceMotion ? undefined : { duration: 1.1, delay: 0.08, ease: [0.2, 0.7, 0.2, 1] }}
           />
 
-          <div className="hero__immersive-stack" aria-hidden="true">
+          <div className="hero__immersive-stack">
             <Suspense fallback={null}>
               <PokeballScene3D />
-              <PokeballLottie />
+              <PokeballLottie onCelebrate={() => setIsCelebrationOpen(true)} />
             </Suspense>
           </div>
 
@@ -243,6 +247,10 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
       </Container>
+
+      <Suspense fallback={null}>
+        <ScholarshipCelebrationModal isOpen={isCelebrationOpen} onClose={() => setIsCelebrationOpen(false)} />
+      </Suspense>
     </section>
   );
 }

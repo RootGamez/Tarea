@@ -1,14 +1,40 @@
-import { Player } from "@lottiefiles/react-lottie-player";
+import { motion, useReducedMotion } from "framer-motion";
 
-export function PokeballLottie() {
+type PokeballLottieProps = {
+  onCelebrate: () => void;
+};
+
+export function PokeballLottie({ onCelebrate }: PokeballLottieProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="hero__pokeball-lottie" aria-hidden="true">
-      <Player
-        autoplay
-        loop
-        src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
-        style={{ width: "130px", height: "130px" }}
-      />
-    </div>
+    <button type="button" className="hero__pokeball-lottie" onClick={onCelebrate} aria-label="Abrir premio especial">
+      <div className="hero__pokeball-lottie-anim" aria-hidden="true">
+        <motion.span
+          className="hero__gift-emoji"
+          initial={shouldReduceMotion ? false : { y: 0, rotate: -2 }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  y: [0, -7, 0],
+                  rotate: [-3, 4, -3],
+                  scale: [1, 1.06, 1]
+                }
+          }
+          transition={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  duration: 1.7,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut"
+                }
+          }
+        >
+          🎁
+        </motion.span>
+      </div>
+    </button>
   );
 }
