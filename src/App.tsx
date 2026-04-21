@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { HeroSection } from "./features/landing/sections/HeroSection";
-import { AboutSection } from "./features/landing/sections/AboutSection";
-import { ProgramsSection } from "./features/landing/sections/ProgramsSection";
-import { CTASection } from "./features/landing/sections/CTASection";
+import { LandingView } from "./features/landing/LandingView";
+import { ServicesView } from "./features/services/ServicesView";
 import { NosotrosPage } from "./features/nosotros/NosotrosPage";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
@@ -11,12 +9,17 @@ function HomePage() {
   return (
     <>
       <Header />
-      <main className="site-main">
-        <HeroSection />
-        <ProgramsSection />
-        <AboutSection />
-        <CTASection />
-      </main>
+      <LandingView />
+      <Footer />
+    </>
+  );
+}
+
+function ServicesPage() {
+  return (
+    <>
+      <Header />
+      <ServicesView />
       <Footer />
     </>
   );
@@ -38,15 +41,21 @@ function App() {
   }, []);
 
   if (pathname === "/nosotros") {
-    return <NosotrosPage onGoHome={() => {
-      window.history.pushState({}, "", "/");
-      setPathname("/");
-    }} />;
+    return (
+      <NosotrosPage
+        onGoHome={() => {
+          window.history.pushState({}, "", "/");
+          setPathname("/");
+        }}
+      />
+    );
   }
 
-  return (
-    <HomePage />
-  );
+  if (pathname === "/servicios") {
+    return <ServicesPage />;
+  }
+
+  return <HomePage />;
 }
 
 export default App;
