@@ -1,12 +1,12 @@
 export const siteContent = {
   institutionName: "Johto School",
-  tagline: "Formamos lideres con excelencia academica y valores humanos.",
+  tagline: "Formamos entrenadores con estrategia, disciplina y juego limpio en Pokemon.",
   mission:
-    "Ofrecer una educacion integral, innovadora y centrada en el estudiante para transformar su futuro.",
+    "Enseñamos personas de todas las edades a dominar Pokemon con pensamiento táctico, trabajo en equipo y mejora continua.",
   programs: [
-    "Inicial y Primaria",
-    "Secundaria con enfoque STEM",
-    "Idiomas y habilidades digitales"
+    "Fundamentos de combate y tipos Pokemon",
+    "Estrategia competitiva y armado de equipos",
+    "Torneos guiados y análisis de partidas"
   ],
   services: [
     {
