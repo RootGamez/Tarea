@@ -1,200 +1,180 @@
 import { Suspense, lazy, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Header } from "../../components/layout/Header";
 import { siteContent } from "../../lib/constants/site";
 
 const PokeEnergyParticles = lazy(() =>
-  import("../landing/components/PokeEnergyParticles").then((module) => ({ default: module.PokeEnergyParticles }))
+  import("../landing/components/PokeEnergyParticles").then((m) => ({ default: m.PokeEnergyParticles }))
 );
 
 const educationalPillars = [
   "Entrenamiento por niveles: principiante, intermedio y competitivo",
   "Lectura de meta, tipos, coberturas y toma de decisiones tácticas",
   "Talleres de armado de equipos y simulación de combates",
-  "Mentoría personalizada para mejorar reflejos, estrategia y consistencia"
+  "Mentoría personalizada para mejorar reflejos, estrategia y consistencia",
 ];
 
 const champions = [
-  {
-    name: "Alonso Barrueta",
-    title: "Campeón regional - Formato individual",
-    image: "/hombre.png"
-  },
-  {
-    name: "Maya Rios",
-    title: "Top clasificatorio nacional - Liga academica",
-    image: "/mujer.png"
-  }
+  { name: "Alonso Barrueta", title: "Campeón regional — Formato individual", image: "/hombre.png" },
+  { name: "Maya Rios", title: "Top clasificatorio nacional — Liga académica", image: "/mujer.png" },
 ];
 
-const floatingTags = ["Metagame real", "Combate tactico", "Juego limpio"] as const;
-
 const panelOrder = ["enfoque", "egresados", "comunidad"] as const;
+type PanelKey = (typeof panelOrder)[number];
 
-type PanelKey = typeof panelOrder[number];
+type NosotrosPageProps = { pathname: string; onNavigate: (target: string) => void };
 
-type NosotrosPageProps = {
-  pathname: string;
-  onNavigate: (target: string) => void;
+const panelVariants = {
+  hidden: { opacity: 0, x: 32 },
+  visible: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -32 },
 };
 
 export function NosotrosPage({ pathname, onNavigate }: NosotrosPageProps) {
-  const [visiblePanels, setVisiblePanels] = useState<Record<PanelKey, boolean>>({
-    enfoque: false,
-    egresados: false,
-    comunidad: false
-  });
+  const [activePanel, setActivePanel] = useState<PanelKey>("enfoque");
   const shouldReduceMotion = useReducedMotion();
 
-  const panelLabels = useMemo(
-    () => ({
-      enfoque: "Nuestro enfoque",
-      egresados: "Egresados",
-      comunidad: "Comunidad"
-    }),
+  const panelLabels: Record<PanelKey, string> = useMemo(
+    () => ({ enfoque: "Nuestro enfoque", egresados: "Egresados", comunidad: "Comunidad" }),
     []
   );
+
+  const transition = shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: [0.2, 0.7, 0.2, 1] as const };
 
   return (
     <>
       <Header pathname={pathname} onNavigate={onNavigate} />
 
-      <main className="nosotros-main">
-        <section id="nosotros" className="hero nosotros-hero" aria-labelledby="nosotros-title">
-          <div className="nosotros-hero__viewport">
-            <Suspense fallback={null}>
-              <PokeEnergyParticles />
-            </Suspense>
+      <main className="nos-main">
+        <section id="nosotros" className="nos-scene" aria-labelledby="nosotros-title">
 
-            <figure className="nosotros-hero__media" aria-hidden="true">
-              <img src="/johtosch.png" alt="" loading="lazy" />
-            </figure>
+          {/* Full-screen background */}
+          <figure className="nos-bg" aria-hidden="true">
+            <img src="/johtosch.png" alt="" loading="lazy" />
+          </figure>
+          <div className="nos-overlay" aria-hidden="true" />
+          <Suspense fallback={null}>
+            <PokeEnergyParticles />
+          </Suspense>
 
-            <div className="nosotros-hero__content">
-              <p className="hero__eyebrow">Conoce Johto School</p>
-              <h1 id="nosotros-title">Nosotros</h1>
-              <p className="hero__tagline nosotros-hero__mission">{siteContent.mission}</p>
-              <div className="hero__actions">
-                <Button href={siteContent.contact.whatsappUrl} target="_blank" rel="noreferrer">
-                  Hablar con admisiones
-                </Button>
-                <Button
-                  href="/#servicios"
-                  variant="secondary"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onNavigate("/#servicios");
-                  }}
-                >
-                  Ver servicios
-                </Button>
-              </div>
+          {/* Two-column layout */}
+          <div className="nos-layout">
 
-              <div className="nosotros-hero__panel-switch" role="group" aria-label="Mostrar u ocultar secciones de nosotros">
-                {panelOrder.map((panelKey) => (
+            {/* ── Left sidebar ── */}
+            <motion.aside
+              className="nos-sidebar"
+              initial={shouldReduceMotion ? false : { opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={transition}
+            >
+              <p className="nos-eyebrow">Conoce Johto School</p>
+              <h1 id="nosotros-title" className="nos-heading">Nosotros</h1>
+              <p className="nos-mission">{siteContent.mission}</p>
+
+              <nav className="nos-nav" aria-label="Secciones de nosotros">
+                {panelOrder.map((key) => (
                   <button
-                    key={panelKey}
-                    id={`nosotros-tab-${panelKey}`}
+                    key={key}
                     type="button"
-                    aria-pressed={visiblePanels[panelKey]}
-                    aria-controls={`nosotros-panel-${panelKey}`}
-                    className={`nosotros-hero__panel-button${visiblePanels[panelKey] ? " is-active" : ""}`}
-                    onClick={() =>
-                      setVisiblePanels((current) => ({
-                        ...current,
-                        [panelKey]: !current[panelKey]
-                      }))
-                    }
+                    aria-pressed={activePanel === key}
+                    className={`nos-nav__btn${activePanel === key ? " is-active" : ""}`}
+                    onClick={() => setActivePanel(key)}
                   >
-                    {panelLabels[panelKey]}
+                    <span className="nos-nav__icon" aria-hidden="true">
+                      {key === "enfoque" ? "🎯" : key === "egresados" ? "🏆" : "🤝"}
+                    </span>
+                    {panelLabels[key]}
                   </button>
                 ))}
-              </div>
+              </nav>
+            </motion.aside>
 
-              <motion.aside
-                id="nosotros-panel-enfoque"
-                aria-labelledby="nosotros-tab-enfoque"
-                className={`nosotros-hero__live-panel nosotros-panel nosotros-panel--enfoque${visiblePanels.enfoque ? " is-visible" : " is-hidden"}`}
-                initial={false}
-                animate={
-                  shouldReduceMotion
-                    ? undefined
-                    : visiblePanels.enfoque
-                      ? { opacity: 1, y: 0, scale: 1 }
-                      : { opacity: 0, y: 10, scale: 0.98 }
-                }
-                transition={shouldReduceMotion ? undefined : { duration: 0.25 }}
-              >
-                <ul className="nosotros-pillars" aria-label="Pilares de nuestra propuesta educativa">
-                  {educationalPillars.map((pillar, index) => (
-                    <li key={pillar}>
-                      <span className="nosotros-pillars__index">0{index + 1}</span>
-                      <p>{pillar}</p>
-                    </li>
-                  ))}
-                </ul>
-              </motion.aside>
+            {/* ── Right content panel ── */}
+            <div className="nos-content" aria-live="polite">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activePanel}
+                  className="nos-panel"
+                  variants={panelVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  transition={transition}
+                >
+                  {activePanel === "enfoque" && (
+                    <>
+                      <h2 className="nos-panel__title">Nuestro enfoque pedagógico</h2>
+                      <p className="nos-panel__intro">
+                        Formamos jugadores con criterio. Cada nivel está diseñado para desarrollar habilidades
+                        reales de análisis, estrategia y mejora continua.
+                      </p>
+                      <ul className="nos-pillars">
+                        {educationalPillars.map((pillar, i) => (
+                          <li key={pillar} className="nos-pillars__item">
+                            <span className="nos-pillars__num">0{i + 1}</span>
+                            <p>{pillar}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              <motion.aside
-                id="nosotros-panel-egresados"
-                aria-labelledby="nosotros-tab-egresados"
-                className={`nosotros-hero__live-panel nosotros-panel nosotros-panel--egresados${visiblePanels.egresados ? " is-visible" : " is-hidden"}`}
-                initial={false}
-                animate={
-                  shouldReduceMotion
-                    ? undefined
-                    : visiblePanels.egresados
-                      ? { opacity: 1, y: 0, scale: 1 }
-                      : { opacity: 0, y: 10, scale: 0.98 }
-                }
-                transition={shouldReduceMotion ? undefined : { duration: 0.25 }}
-              >
-                <div className="champions-grid" aria-label="Galeria de campeones egresados">
-                  {champions.map((champion) => (
-                    <article key={`${champion.name}-${champion.title}`} className="champion-card">
-                      <img src={champion.image} alt={champion.name} loading="lazy" />
-                      <div className="champion-card__body">
-                        <h3>{champion.name}</h3>
-                        <p>{champion.title}</p>
+                  {activePanel === "egresados" && (
+                    <>
+                      <h2 className="nos-panel__title">Egresados destacados</h2>
+                      <p className="nos-panel__intro">
+                        Nuestros alumnos han competido en torneos regionales y nacionales. Sus logros son
+                        el reflejo de nuestro método.
+                      </p>
+                      <div className="nos-champions">
+                        {champions.map((c) => (
+                          <article key={c.name} className="nos-champion">
+                            <div className="nos-champion__img-wrap">
+                              <img src={c.image} alt={c.name} loading="lazy" />
+                            </div>
+                            <div className="nos-champion__body">
+                              <h3>{c.name}</h3>
+                              <p>{c.title}</p>
+                            </div>
+                          </article>
+                        ))}
                       </div>
-                    </article>
-                  ))}
-                </div>
-              </motion.aside>
+                    </>
+                  )}
 
-              <motion.aside
-                id="nosotros-panel-comunidad"
-                aria-labelledby="nosotros-tab-comunidad"
-                className={`nosotros-hero__live-panel nosotros-panel nosotros-panel--comunidad${visiblePanels.comunidad ? " is-visible" : " is-hidden"}`}
-                initial={false}
-                animate={
-                  shouldReduceMotion
-                    ? undefined
-                    : visiblePanels.comunidad
-                      ? { opacity: 1, y: 0, scale: 1 }
-                      : { opacity: 0, y: 10, scale: 0.98 }
-                }
-                transition={shouldReduceMotion ? undefined : { duration: 0.25 }}
-              >
-                <div className="nosotros-info-grid" aria-label="Informacion institucional">
-                  <article className="nosotros-info-card">
-                    <h3>Como ensenamos</h3>
-                    <p>
-                      Nuestro equipo combina clases guiadas, practica en batallas, revision de errores y planes de
-                      mejora para que cada persona aprenda a competir con criterio y confianza.
-                    </p>
-                  </article>
-                  <article className="nosotros-info-card">
-                    <h3>Contacto directo</h3>
-                    <p>
-                      Telefono: {siteContent.contact.phone}
-                      <br />
-                      Correo: {siteContent.contact.email}
-                    </p>
-                  </article>
-                </div>
-              </motion.aside>
+                  {activePanel === "comunidad" && (
+                    <>
+                      <h2 className="nos-panel__title">Nuestra comunidad</h2>
+                      <p className="nos-panel__intro">
+                        Más que una escuela: una comunidad de entrenadores que aprenden juntos, se desafían
+                        y crecen en cada batalla.
+                      </p>
+                      <div className="nos-info-grid">
+                        <article className="nos-info-card">
+                          <h3>Cómo enseñamos</h3>
+                          <p>
+                            Clases guiadas, práctica en batallas, revisión de errores y planes de mejora
+                            personalizados para cada entrenador.
+                          </p>
+                        </article>
+                        <article className="nos-info-card">
+                          <h3>Únete ahora</h3>
+                          <p>
+                            Contáctanos por WhatsApp al{" "}
+                            <a href={siteContent.contact.whatsappUrl} target="_blank" rel="noreferrer">
+                              {siteContent.contact.phone}
+                            </a>{" "}
+                            o escríbenos a{" "}
+                            <a href={`mailto:${siteContent.contact.email}`}>{siteContent.contact.email}</a>.
+                          </p>
+                        </article>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
+
           </div>
         </section>
       </main>
