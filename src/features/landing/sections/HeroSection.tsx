@@ -1,10 +1,41 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { type MouseEvent } from "react";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { Container } from "../../../components/layout/Container";
 import { Button } from "../../../components/ui/Button";
 import { siteContent } from "../../../lib/constants/site";
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+
+  const springConfig = { stiffness: 90, damping: 22, mass: 0.8 };
+  const smoothX = useSpring(pointerX, springConfig);
+  const smoothY = useSpring(pointerY, springConfig);
+
+  const frameTransform = useMotionTemplate`translate3d(${smoothX}px, ${smoothY}px, 0)`;
+  const contentTransform = useMotionTemplate`translate3d(calc(${smoothX}px * -0.5), calc(${smoothY}px * -0.5), 0)`;
+  const tagsTransform = useMotionTemplate`translate3d(calc(${smoothX}px * -0.9), calc(${smoothY}px * -0.9), 0)`;
+
+  const handlePointerMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const offsetX = (event.clientX - centerX) / rect.width;
+    const offsetY = (event.clientY - centerY) / rect.height;
+
+    pointerX.set(offsetX * -16);
+    pointerY.set(offsetY * -16);
+  };
+
+  const handlePointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   const titleWords = siteContent.institutionName.split(" ");
 
@@ -23,13 +54,26 @@ export function HeroSection() {
   return (
     <section id="presentacion" className="hero" aria-labelledby="hero-title">
       <Container>
-        <div className="hero__frame">
+        <motion.div
+          className="hero__frame"
+          onMouseMove={handlePointerMove}
+          onMouseLeave={handlePointerLeave}
+          style={shouldReduceMotion ? undefined : { transform: frameTransform }}
+        >
+          <motion.div
+            className="hero__intro-curtain"
+            role="presentation"
+            initial={shouldReduceMotion ? false : { opacity: 1, scaleY: 1 }}
+            animate={shouldReduceMotion ? undefined : { opacity: 0, scaleY: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 1.1, delay: 0.08, ease: [0.2, 0.7, 0.2, 1] }}
+          />
           <div className="hero__overlay" role="presentation" />
           <div className="hero__shimmer" role="presentation" />
 
           <motion.ul
             className="hero__floating-tags"
             aria-label="Aspectos destacados"
+            style={shouldReduceMotion ? undefined : { transform: tagsTransform }}
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{ ...contentTransition, delay: shouldReduceMotion ? 0 : 0.25 }}
@@ -48,6 +92,7 @@ export function HeroSection() {
 
           <motion.div
             className="hero__content"
+            style={shouldReduceMotion ? undefined : { transform: contentTransform }}
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{ ...contentTransition, delay: shouldReduceMotion ? 0 : 0.1 }}
@@ -116,7 +161,7 @@ export function HeroSection() {
               ))}
             </motion.ul>
           </motion.div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

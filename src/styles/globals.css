@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Press+Start+2P&display=swap");
 
 * {
   box-sizing: border-box;
@@ -121,6 +121,8 @@ body {
   overflow: hidden;
   isolation: isolate;
   min-height: calc(100vh - 8.25rem);
+  transform-style: preserve-3d;
+  will-change: transform;
   border-radius: 28px;
   border: 1px solid rgba(141, 154, 255, 0.35);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.38);
@@ -135,6 +137,17 @@ body {
   background-size: cover;
   background-position: center;
   animation: heroPan 20s ease-in-out infinite alternate;
+}
+
+.hero__intro-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  transform-origin: 50% 0%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(105, 94, 255, 0.4), transparent 50%),
+    linear-gradient(150deg, rgba(5, 10, 42, 0.95), rgba(11, 17, 58, 0.9));
 }
 
 .hero__frame::before {
@@ -155,6 +168,7 @@ body {
   background: radial-gradient(circle at 30% 30%, rgba(177, 153, 255, 0.5), rgba(177, 153, 255, 0));
   filter: blur(3px);
   pointer-events: none;
+  z-index: 1;
   animation: orbFloat 10s ease-in-out infinite;
 }
 
@@ -224,13 +238,16 @@ body {
 
 .hero h1 {
   margin: var(--space-3) 0;
-  font-family: var(--font-heading);
+  font-family: var(--font-pokemon);
   font-size: clamp(3rem, 9vw, 7.4rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   text-wrap: balance;
   perspective: 600px;
+  text-shadow:
+    0 2px 0 rgba(9, 13, 54, 0.95),
+    0 8px 18px rgba(0, 0, 0, 0.42);
 }
 
 .hero__title-word {
@@ -505,6 +522,10 @@ body {
   }
 
   .hero__frame {
+    transform: none !important;
+  }
+
+  .hero__frame {
     border-radius: 20px;
   }
 
@@ -553,6 +574,10 @@ body {
   .hero__shimmer,
   .hero__floating-tags li {
     animation: none;
+  }
+
+  .hero__intro-curtain {
+    display: none;
   }
 
   .button,
