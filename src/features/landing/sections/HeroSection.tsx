@@ -1,13 +1,36 @@
-import { type MouseEvent } from "react";
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { type MouseEvent, useEffect, useState } from "react";
+import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { Container } from "../../../components/layout/Container";
 import { Button } from "../../../components/ui/Button";
 import { siteContent } from "../../../lib/constants/site";
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
+  const [mottoIndex, setMottoIndex] = useState(0);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
+
+  const animeInspiredMottos = [
+    "Cada desafio es una oportunidad para evolucionar.",
+    "La verdadera fuerza nace de entrenar con disciplina.",
+    "La amistad convierte cualquier batalla en aprendizaje.",
+    "Un gran entrenador nunca deja de aprender.",
+    "Con estrategia y coraje, todo objetivo se alcanza."
+  ] as const;
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setMottoIndex((current) => (current + 1) % animeInspiredMottos.length);
+    }, 3400);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [animeInspiredMottos.length, shouldReduceMotion]);
 
   const springConfig = { stiffness: 90, damping: 22, mass: 0.8 };
   const smoothX = useSpring(pointerX, springConfig);
@@ -128,6 +151,28 @@ export function HeroSection() {
             >
               {siteContent.tagline}
             </motion.p>
+
+            <motion.div
+              className="hero__motto"
+              aria-live="polite"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ ...contentTransition, delay: shouldReduceMotion ? 0 : 0.58 }}
+            >
+              <span className="hero__motto-label">Lema del dia</span>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={mottoIndex}
+                  className="hero__motto-text"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 14, filter: "blur(3px)" }}
+                  animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={shouldReduceMotion ? undefined : { opacity: 0, y: -10, filter: "blur(3px)" }}
+                  transition={shouldReduceMotion ? undefined : { duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
+                >
+                  {animeInspiredMottos[mottoIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </motion.div>
 
             <motion.div
               className="hero__actions"

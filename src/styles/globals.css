@@ -262,6 +262,54 @@ body {
   color: #d6dcff;
 }
 
+.hero__motto {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: 0.35rem;
+  max-width: min(42rem, 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(163, 176, 255, 0.48);
+  background:
+    linear-gradient(132deg, rgba(20, 22, 71, 0.78), rgba(10, 13, 48, 0.72)),
+    linear-gradient(90deg, rgba(102, 224, 82, 0.16), rgba(102, 224, 82, 0));
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.28),
+    inset 0 0 24px rgba(112, 128, 255, 0.2);
+  padding: 0.8rem 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__motto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 6%, rgba(255, 255, 255, 0.16) 30%, transparent 44%);
+  transform: translateX(-40%);
+  animation: mottoBeam 5s linear infinite;
+  pointer-events: none;
+}
+
+.hero__motto-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #96ffa4;
+  font-weight: 700;
+}
+
+.hero__motto-text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: #eff3ff;
+  text-wrap: balance;
+  font-weight: 600;
+}
+
 .hero__actions {
   display: flex;
   gap: var(--space-3);
@@ -354,6 +402,26 @@ body {
 
   50% {
     transform: translateY(-6px);
+  }
+}
+
+@keyframes mottoBeam {
+  0% {
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateX(48%);
+    opacity: 0;
   }
 }
 
@@ -542,6 +610,10 @@ body {
     width: 100%;
   }
 
+  .hero__motto {
+    max-width: 100%;
+  }
+
   .hero__actions .button {
     flex: 1;
   }
@@ -578,6 +650,10 @@ body {
 
   .hero__intro-curtain {
     display: none;
+  }
+
+  .hero__motto::before {
+    animation: none;
   }
 
   .button,
