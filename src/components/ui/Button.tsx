@@ -6,12 +6,12 @@ type CommonProps = {
 };
 
 type ButtonAsButton = CommonProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & {
-    href?: never;
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & {
+    href?: undefined;
   };
 
 type ButtonAsLink = CommonProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
     href: string;
   };
 
@@ -20,16 +20,20 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 export function Button({ children, variant = "primary", ...props }: ButtonProps) {
   const className = `button button--${variant}`;
 
-  if ("href" in props && props.href) {
+  if (typeof props.href === "string") {
+    const anchorProps = props as ButtonAsLink;
+
     return (
-      <a {...props} className={className}>
+      <a {...anchorProps} className={className}>
         {children}
       </a>
     );
   }
 
+  const buttonProps = props as ButtonAsButton;
+
   return (
-    <button type="button" {...props} className={className}>
+    <button {...buttonProps} type={buttonProps.type ?? "button"} className={className}>
       {children}
     </button>
   );
