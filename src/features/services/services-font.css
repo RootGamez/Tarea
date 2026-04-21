@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sora:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Sora', sans-serif;
+}
+
+.pokemon-title,
+.pokemon-heading {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.services-page,
+.services-page__card,
+.services-page__card-title,
+.services-page__description,
+.services-page__features,
+.services-page__footer-note {
+  font-family: var(--font-body);
+}

@@ -1,0 +1,14 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1C2D70"/>
+      <stop offset="1" stop-color="#0F1D4D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg1)"/>
+  <circle cx="190" cy="170" r="130" fill="#2A75BB" fill-opacity="0.28"/>
+  <circle cx="980" cy="520" r="210" fill="#FFCB05" fill-opacity="0.14"/>
+  <rect x="120" y="205" width="960" height="280" rx="20" fill="#0C163A" fill-opacity="0.62" stroke="#FFCB05" stroke-opacity="0.6"/>
+  <text x="160" y="305" fill="#FFFFFF" font-size="54" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Fundamentos Competitivos</text>
+  <text x="160" y="365" fill="#DCE6FF" font-size="30" font-family="Segoe UI, Arial, sans-serif">Tipos, roles, sinergia y control de tempo</text>
+</svg>
